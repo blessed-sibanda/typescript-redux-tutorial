@@ -1,5 +1,5 @@
-import { Action, Reducer } from '../basics/models';
-import Store from '../basics/store';
+import { Action, Reducer, createStore, AnyAction, Store } from 'redux';
+
 import {
   AddMessageAction,
   MessageActions,
@@ -11,7 +11,12 @@ interface AppState {
   messages: String[];
 }
 
-let reducer: Reducer<AppState> = (state: AppState, action: Action): AppState => {
+let initialState: AppState = { messages: [] };
+
+let reducer: Reducer<AppState, AnyAction> = (
+  state: AppState = initialState,
+  action: Action,
+) => {
   switch (action.type) {
     case ADD_MESSAGE:
       return {
@@ -30,7 +35,7 @@ let reducer: Reducer<AppState> = (state: AppState, action: Action): AppState => 
   }
 };
 
-let store = new Store<AppState>(reducer, { messages: [] });
+let store: Store<AppState> = createStore(reducer);
 console.log(store.getState());
 
 store.dispatch(MessageActions.addMessage('I love ruby on rails so much'));

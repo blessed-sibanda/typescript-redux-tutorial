@@ -2,7 +2,7 @@ import { DECREMENT, INCREMENT, PLUS } from './action-types';
 import { Action, ListenerCallback, Reducer, UnsubscribeCallback } from './models';
 import { reducer } from './reducer';
 
-class Store<T> {
+export default class Store<T> {
   private _state: T;
   private _listeners: ListenerCallback[] = [];
 
@@ -27,16 +27,16 @@ class Store<T> {
   }
 }
 
-let store = new Store<number>(reducer, 0);
-console.log(store.getState());
+// let store = new Store<number>(reducer, 0);
+// console.log(store.getState());
 
-let unsubscribe = store.subscribe(() => {
-  console.log('subscribed: ', store.getState());
-});
+// let unsubscribe = store.subscribe(() => {
+//   console.log('subscribed: ', store.getState());
+// });
 
-store.dispatch({ type: INCREMENT });
-store.dispatch({ type: INCREMENT });
+// store.dispatch({ type: INCREMENT });
+// store.dispatch({ type: INCREMENT });
 
-unsubscribe();
-store.dispatch({ type: DECREMENT });
-console.log(store.getState());
+// unsubscribe();
+// store.dispatch({ type: DECREMENT });
+// console.log(store.getState());
